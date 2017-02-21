@@ -63,6 +63,22 @@ vector<int> CalculateStonesSet(const vector<int>& weights, int P)
 		}
 	}
 
+	if (stonesSet[P] == -1)
+	{
+		for (int i = weights.size() - 1; i >=0 ; i--)
+		{
+			if (P - weights[i] >= 0)
+			{
+				if (stonesSet[P - weights[i]] != -1)
+				{
+					stonesSet[P] = i + 1;
+					break;
+				}
+			}
+		}
+	}
+
+
 	vector<int> result;
 	if (stonesSet[P] > 0)
 	{
