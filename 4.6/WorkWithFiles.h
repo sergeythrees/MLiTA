@@ -9,10 +9,9 @@ void ReadArray(const std::string &fileName, std::vector<int>& weights, int& weig
 	if (file.is_open())
 	{
 		file >> std::string();
-		while (!file.eof() && !file.fail())
+		int temp;
+		while (file >> temp)
 		{
-			int temp;
-			file >> temp;
 			weightSumTemp += temp;
 			weights.push_back(temp);
 		}
