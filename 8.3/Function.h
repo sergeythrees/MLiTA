@@ -7,13 +7,20 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 {
 	int size = result.size();
 
+	int j = 0;
+	int k = 0;
 	bool wasInserted = true;
 	for (int number = 1; number <= numbersCount && wasInserted; ++number)
 	{
 		wasInserted = false;
-		for (int j=0; j < size && !wasInserted; ++j)
+
+		if (j >= size - 1)
+			j = 0;
+		while ((j < size) && !wasInserted)
 		{
-			for (int k=0; k < size && !wasInserted; ++k)
+			if (k >= size - 1)
+				k = 0;
+			while ((k < size) && !wasInserted)
 			{
 				if (result[j][k] == -1)
 				{
@@ -23,9 +30,15 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 						result[j][k] = number;
 						wasInserted = true;
 					}
+						
 				}
+				if (!wasInserted)
+					++k;
 			}
+			if (!wasInserted)
+				++j;
 		}
+		
 	}
 
 	return wasInserted;
@@ -40,14 +53,14 @@ bool VerifyForRow(std::vector<std::vector<T>>& left,
 	for (int i= cellIndex +1; i < size && result; ++i )
 	{
 		
-		if (cellIndex > i - left[rowIndex][i] || cellIndex == i - left[rowIndex][i])
+		if (matrix[rowIndex][i] == -1)
 		{
-			if (matrix[rowIndex][i] == -1)
+			if (cellIndex > i - left[rowIndex][i] || cellIndex == i - left[rowIndex][i])
 			{
 				result = false;
 			}
 		}
-		if (matrix[i][cellIndex] != -1)
+		else
 		{
 			if (left[rowIndex][i] == 0 && left[rowIndex][i] < number)
 			{
@@ -66,23 +79,36 @@ bool VerifyForCell(std::vector<std::vector<T>>& top,
 	int size = top.size();
 	for (int i = rowIndex + 1; i < size && result; ++i)
 	{
-		
+		if (matrix[i][cellIndex] == -1)
+		{
 			if (rowIndex > i - top[i][cellIndex] || rowIndex == i - top[i][cellIndex])
 			{
-				if (matrix[i][cellIndex] == -1)
-				{
-					result = false;
-				}
+				result = false;
 			}
-			if (matrix[i][cellIndex] != -1)
+		}
+		else
+		{
+			if (top[i][cellIndex] == 0 && matrix[i][cellIndex] < number)
 			{
-				if (top[i][cellIndex] == 0 && matrix[i][cellIndex] < number)
-				{
-					result = false;
-				}
+				result = false;
 			}
+		}
 	}
 	return result;
 }
 
+template <typename T>
+bool VerifyTopAndLeftMatrix(std::vector<std::vector<T>>& top,
+	std::vector<std::vector<T>>& left)
+{
+	for (int cell = 0; cell < top.size(); ++cell)
+		for (int row = 0; row < top.size(); ++row)
+			if (top[row][cell] > row)
+				return false;
+	for (int row = 0; row < top.size(); ++row)
+		for (int cell = 0; cell < left.size(); ++cell)
+			if (left[row][cell] > cell)
+				return false;
 
+	return true;
+}

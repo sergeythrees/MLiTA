@@ -20,12 +20,12 @@ int main()
 	FillMatrix(input, left, true);
 	result.assign(top.size(), std::vector<int>(top.size(), -1));
 
-	if (GenerateMatrix(result, top, left, 9))
+	if (VerifyTopAndLeftMatrix(top, left) &&
+		GenerateMatrix(result, top, left, 9))
 	{
 		PrintMatrix(result, output);
 		PrintMatrix(result, cout);
 	}
-		
 	else
 	{
 		output << "0" << endl; 
