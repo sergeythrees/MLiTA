@@ -9,19 +9,28 @@ using namespace std;
 
 int main()
 {
-	
-
-
-	/*vector<vector<int>> top;
+	vector<vector<int>> top;
 	vector<vector<int>> left;
 	vector<vector<int>> result;
-
 	ifstream input("input.txt");
-	getline(input, string());
-	ReadMatrixFromStream(input, top, true);
-	ReadMatrixFromStream(input, left, true);
+	ofstream output("output.txt");
 
-	CalculateMatrix(top, left, result);
-	PrintMatrix(result);*/
+	getline(input, string());
+	FillMatrix(input, top, true);
+	FillMatrix(input, left, true);
+	result.assign(top.size(), std::vector<int>(top.size(), -1));
+
+	if (GenerateMatrix(result, top, left, 9))
+	{
+		PrintMatrix(result, output);
+		PrintMatrix(result, cout);
+	}
+		
+	else
+	{
+		output << "0" << endl; 
+		cout << "0" << endl;
+	}
+
     return 0;
 }

@@ -4,7 +4,7 @@
 #include <sstream>
 
 template <typename T>
-void ReadMatrixFromStream(std::istream &input, std::vector<std::vector<T>>& matrix, bool isSquare = false)
+void FillMatrix(std::istream &input, std::vector<std::vector<T>>& matrix, bool isSquare = false)
 {
 		std::string line;
 		std::vector<T> row;
@@ -55,4 +55,12 @@ void PrintMatrix(const std::vector<std::vector<T>>& matrix, std::ostream& output
 			output << cell << " ";
 		output << endl;
 	}
+}
+
+
+template <typename T>
+void PrintVector(const std::vector<T>& vector, std::ostream& output = std::cout)
+{
+	for (auto element : vector)
+		output << element << " ";
 }
