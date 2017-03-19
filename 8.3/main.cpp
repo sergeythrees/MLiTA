@@ -24,12 +24,10 @@ int main()
 		GenerateMatrix(result, top, left, 9))
 	{
 		PrintMatrix(result, output);
-		PrintMatrix(result, cout);
 	}
 	else
 	{
 		output << "0" << endl; 
-		cout << "0" << endl;
 	}
 
     return 0;
