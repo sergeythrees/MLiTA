@@ -28,7 +28,6 @@ int main()
 	{
 		output << "0" << endl; 
 	}
-	PrintMatrix(result);
 
     return 0;
 }
