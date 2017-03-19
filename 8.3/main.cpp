@@ -1,9 +1,8 @@
-//Степаненко С. ПС-22
+//Степаненко С. ПС-22, лаб 8.3
 
 #include "stdafx.h"
-#include "WorkWithFiles.h"
-#include "Function.h"
-#include <math.h>
+#include "ReadAndWrite.h"
+#include "GenerateMatrix.h"
 
 using namespace std; 
 
