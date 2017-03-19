@@ -20,7 +20,7 @@ int main()
 	result.assign(top.size(), std::vector<int>(top.size(), -1));
 
 	if (VerifyTopAndLeftMatrix(top, left) &&
-		GenerateMatrix(result, top, left, 9))
+		GenerateMatrix(result, top, left, top.size() * top.size()))
 	{
 		PrintMatrix(result, output);
 	}
@@ -28,6 +28,7 @@ int main()
 	{
 		output << "0" << endl; 
 	}
+	PrintMatrix(result);
 
     return 0;
 }
