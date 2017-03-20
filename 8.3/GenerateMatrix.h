@@ -49,7 +49,7 @@ bool VerifyForRow(std::vector<std::vector<T>>& left,
 		}
 		else
 		{
-			if (left[rowIndex][i] == 0 && left[rowIndex][i] < number)
+			if (left[rowIndex][i] == 0 && matrix[rowIndex][i] < number)
 			{
 				result = false;
 			}
