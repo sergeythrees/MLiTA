@@ -42,7 +42,7 @@ bool VerifyForRow(std::vector<std::vector<T>>& left,
 	{
 		if (matrix[rowIndex][i] == -1)
 		{
-			if ( columnIndex > i - left[rowIndex][i] || columnIndex == i - left[rowIndex][i])
+			if ((GetFreeCellsCount(matrix, rowIndex, 0, i, -1, true) <= left[rowIndex][i]))
 			{
 				result = false;
 			}
@@ -68,7 +68,8 @@ bool VerifyForColumn(std::vector<std::vector<T>>& top,
 	{
 		if (matrix[i][columnIndex] == -1)
 		{
-			if (rowIndex > i - top[i][columnIndex] || rowIndex == i - top[i][columnIndex])
+			if ((GetFreeCellsCount(matrix, columnIndex, 0, i, -1, false)
+				<= top[i][columnIndex]))
 			{
 				result = false;
 			}
@@ -98,4 +99,26 @@ bool VerifyTopAndLeftMatrix(std::vector<std::vector<T>>& top,
 				return false;
 
 	return true;
+}
+
+template <typename T>
+unsigned GetFreeCellsCount(std::vector<std::vector<T>>& matrix,
+	unsigned fieldNumber, unsigned from, unsigned to, 
+	T freeCellValue, bool isForRow)
+{
+	unsigned count = 0;
+	if (isForRow)
+	{
+		for (int i = from; i < to; ++i)
+			if (matrix[fieldNumber][i] == freeCellValue)
+				++count;
+	}
+	else
+	{
+		for (int i = from; i < to; ++i)
+			if (matrix[i][fieldNumber] == freeCellValue)
+				++count;
+	}
+
+	return count;
 }
