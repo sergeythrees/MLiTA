@@ -29,31 +29,6 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 				}
 			}
 		}
-		/*if (j >= size - 1)
-			j = 0;
-		while ((j < size) && !wasInserted)
-		{
-			if (k >= size - 1)
-				k = 0;
-			while ((k < size) && !wasInserted)
-			{
-				if (result[j][k] == -1)
-				{
-					if (VerifyForRow(left, result, j, k, number) &&
-						VerifyForCell(top, result, j, k, number))
-					{
-						result[j][k] = number;
-						wasInserted = true;
-					}
-						
-				}
-				if (!wasInserted)
-					++k;
-			}
-			if (!wasInserted)
-				++j;
-		}
-		*/
 	}
 
 	return wasInserted;
