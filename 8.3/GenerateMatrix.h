@@ -13,8 +13,23 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 	for (int number = 1; number <= numbersCount && wasInserted; ++number)
 	{
 		wasInserted = false;
+		for (j = 0; j < size && !wasInserted; ++j)
+		{
+			for (k = 0; k < size && !wasInserted; ++k)
+			{
+				if (result[j][k] == -1)
+				{
+					if (VerifyForRow(left, result, j, k, number) &&
+						VerifyForCell(top, result, j, k, number))
+					{
+						result[j][k] = number;
+						wasInserted = true;
+					}
 
-		if (j >= size - 1)
+				}
+			}
+		}
+		/*if (j >= size - 1)
 			j = 0;
 		while ((j < size) && !wasInserted)
 		{
@@ -38,7 +53,7 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 			if (!wasInserted)
 				++j;
 		}
-		
+		*/
 	}
 
 	return wasInserted;
