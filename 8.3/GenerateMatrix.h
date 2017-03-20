@@ -7,15 +7,13 @@ bool GenerateMatrix(std::vector<std::vector<T>>& result, std::vector<std::vector
 {
 	int size = result.size();
 
-	int j = 0;
-	int k = 0;
 	bool wasInserted = true;
 	for (int number = 1; number <= numbersCount && wasInserted; ++number)
 	{
 		wasInserted = false;
-		for (j = 0; j < size && !wasInserted; ++j)
+		for (int j = 0; j < size && !wasInserted; ++j)
 		{
-			for (k = 0; k < size && !wasInserted; ++k)
+			for (int k = 0; k < size && !wasInserted; ++k)
 			{
 				if (result[j][k] == -1)
 				{
@@ -42,7 +40,6 @@ bool VerifyForRow(std::vector<std::vector<T>>& left,
 	int size = left[rowIndex].size();
 	for (int i= cellIndex +1; i < size && result; ++i )
 	{
-		
 		if (matrix[rowIndex][i] == -1)
 		{
 			if (cellIndex > i - left[rowIndex][i] || cellIndex == i - left[rowIndex][i])
