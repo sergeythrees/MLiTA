@@ -36,6 +36,9 @@ template <typename T>
 bool VerifyForRow(std::vector<std::vector<T>>& left, 
 	std::vector<std::vector<T>>& matrix, int rowIndex, int columnIndex, int number)
 {
+	if (left[rowIndex][columnIndex] < 
+		GetFreeCellsCount(matrix, rowIndex, 0, columnIndex, -1, true))
+		return false;
 	bool result = true;
 	int size = left[rowIndex].size();
 	for (int i= columnIndex +1; i < size && result; ++i )
@@ -62,6 +65,9 @@ template <typename T>
 bool VerifyForColumn(std::vector<std::vector<T>>& top, 
 	std::vector<std::vector<T>>& matrix, int rowIndex, int columnIndex, int number)
 {
+	if (top[rowIndex][columnIndex] < 
+		GetFreeCellsCount(matrix, columnIndex, 0, rowIndex, -1, false))
+		return false;
 	bool result = true;
 	int size = top.size();
 	for (int i = rowIndex + 1; i < size && result; ++i)
