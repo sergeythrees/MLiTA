@@ -56,7 +56,7 @@ map<size_t, vector<size_t>> KMP_search(istream& input, string searchString)
 		if (k == searchString.length())
 		{
 			size_t foundPos = column;
-			int foundLineIndex = line;
+			size_t foundLineIndex = line;
 			if (foundPos < searchString.length())
 			{
 				do
