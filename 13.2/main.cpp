@@ -26,17 +26,23 @@ map<size_t, vector<size_t>> KMP_search(istream& input, string searchString)
 
 		prefixFunction[readPos] = k;
 	}
-
+	bool isNewLine = false;
 	for (size_t k = 0, column = 0, line = 0; !input.eof(); ++column)
 	{
 		char current;
 		input.get(current);
 		current = ToLower(current);
-		if (current == '\n')
+
+		if (isNewLine)
 		{
 			linesLenghts.push_back(make_pair(line, column));
 			line++;
-			column = 0;	
+			column = 0;
+			isNewLine = false;
+		}
+		if (current == '\n')
+		{
+			isNewLine = true;
 			current = ' ';
 		}
 			
@@ -62,12 +68,11 @@ map<size_t, vector<size_t>> KMP_search(istream& input, string searchString)
 			}
 				
 					
-			foundPos -= searchString.length();
+			foundPos -= searchString.length() - 1;
 			if (allPositions.find(foundLineIndex + 1) != allPositions.end())
 				allPositions.at(foundLineIndex + 1).push_back(foundPos + 1);
 			else
 				allPositions.emplace(foundLineIndex + 1, vector<size_t>{ foundPos + 1 });
-			k = 0;
 		}
 			
 	}
