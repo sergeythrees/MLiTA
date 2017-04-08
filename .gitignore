@@ -254,3 +254,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/13.2/3.txt
+/13.2/4.txt
