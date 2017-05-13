@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>
-#include "ReadAndWrite.h"
+#include "Graph.h"
 
 using namespace std;
 
