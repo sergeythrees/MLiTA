@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab7", "practice\lab7\lab7.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lab8", "practice\lab8\lab8.vcxproj", "{CE95B973-F90E-40B7-BF60-4978BC972064}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FractionTree", "practice\FractionTree\FractionTree.vcxproj", "{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{CE95B973-F90E-40B7-BF60-4978BC972064}.Release|x64.Build.0 = Release|x64
 		{CE95B973-F90E-40B7-BF60-4978BC972064}.Release|x86.ActiveCfg = Release|Win32
 		{CE95B973-F90E-40B7-BF60-4978BC972064}.Release|x86.Build.0 = Release|Win32
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Debug|x64.ActiveCfg = Debug|x64
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Debug|x64.Build.0 = Debug|x64
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Debug|x86.ActiveCfg = Debug|Win32
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Debug|x86.Build.0 = Debug|Win32
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Release|x64.ActiveCfg = Release|x64
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Release|x64.Build.0 = Release|x64
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Release|x86.ActiveCfg = Release|Win32
+		{4FA6D80F-1A53-4635-9E11-557EBF5DBF30}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
