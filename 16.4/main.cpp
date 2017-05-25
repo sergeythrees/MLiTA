@@ -10,6 +10,7 @@
 using namespace std;
 
 void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, const string& commandLine)
+
 {
 	stringstream strm(commandLine);
 	string command;
@@ -38,7 +39,7 @@ void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, 
 		if (strm >> first >> last)
 		{
 			output
-				<< Sum(tree, first, last -1, 1, 0, inputArray.size() - 1)
+				<< Sum(tree, first - 1, last - 2, 1, 0, inputArray.size() - 1)
 				<< endl;
 		}
 		else
