@@ -26,7 +26,7 @@ void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, 
 
 		if (strm >> first >> last >> valueForAdd)
 		{
-			for (int i = first - 1; i < last; i++)
+			for (int i = first - 1; i < last - 1; i++)
 				Update(tree, 1, 0, inputArray.size() - 1, i, func);
 		}
 		else
