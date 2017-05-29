@@ -5,11 +5,10 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <iterator>
 
 using namespace std;
 
-void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, const string& commandLine)
+void HandleCommand(Tree& tree, int arraySize, ostream& output, const string& commandLine)
 
 {
 	stringstream strm(commandLine);
@@ -20,14 +19,10 @@ void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, 
 		int first;
 		int last;
 		int valueForAdd;
-		function<int(int)> func = [&] (int value)
-			{value += valueForAdd;
-			return (value < 0) ? 0 : value; };
 
 		if (strm >> first >> last >> valueForAdd)
 		{
-			for (int i = first - 1; i < last - 1; i++)
-				Update(tree, 1, 0, inputArray.size() - 1, i, func);
+			tree.Update(1, first - 1, last -  2, 0, arraySize - 1, valueForAdd);
 		}
 		else
 			throw invalid_argument("Invalid values");
@@ -39,7 +34,7 @@ void HandleCommand(vector<int>& tree, vector<int>& inputArray, ostream& output, 
 		if (strm >> first >> last)
 		{
 			output
-				<< Sum(tree, first - 1, last - 2, 1, 0, inputArray.size() - 1)
+				<< tree.Sum(1, first - 1, last - 2, 0, arraySize - 1)
 				<< endl;
 		}
 		else
@@ -55,24 +50,20 @@ int main()
 	int energyPostCount = 0;
 	input >> energyPostCount;
 	getline(input, string());
-	vector<int> inputArray(energyPostCount, 0);
-	std::vector<int> tree(energyPostCount * 4);
-	BuildTree(tree, inputArray, 1, 0, energyPostCount - 1);
+	Tree tree(vector<int>(energyPostCount, 0));
 
 	string commandLine;
 	ofstream output("output.txt");
-	while (getline(input, commandLine))
+	
+	try
 	{
-		try
-		{
-			HandleCommand(tree, inputArray, output, commandLine);
-		}
-		catch (const exception& ex)
-		{
-			cerr << ex.what() << endl;
-			return EXIT_FAILURE;
-		}
-		
+		while (getline(input, commandLine))
+			HandleCommand(tree, energyPostCount, output, commandLine);
+	}
+	catch (const exception& ex)
+	{
+		cerr << ex.what() << endl;
+		return EXIT_FAILURE;
 	}
 
 	return 0;

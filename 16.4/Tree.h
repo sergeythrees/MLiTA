@@ -1,46 +1,65 @@
 #pragma once
 #include <vector>
 #include <algorithm>
-#include <functional>
 
-void BuildTree(std::vector<int> &tree, std::vector<int> arr, int i, int leftLimit, int rightLimit)
+class Tree
 {
-	if (leftLimit == rightLimit)
-		tree[i] = arr[leftLimit];
-	else
+public:
+
+	Tree(const std::vector<int>& arr)
+		:m_tree(std::vector<int>(arr.size() * 4, 0)),
+		m_treeDiffs(m_tree)
 	{
-		int half = (leftLimit + rightLimit) / 2;
-		BuildTree(tree, arr, i * 2, leftLimit, half);
-		BuildTree(tree, arr, i * 2 + 1, half + 1, rightLimit);
-		tree[i] = tree[i * 2] + tree[i * 2 + 1];
+		BuildTree(arr, 1, 0, arr.size() - 1);
 	}
-}
 
-int Sum(const std::vector<int> &tree, int begin, int end, int i, int leftLimit, int rightLimit)
-{
-	if (begin > end)
-		return 0;
-	if (begin == leftLimit && end == rightLimit)
-		return tree[i];
-
-	int half = (leftLimit + rightLimit) / 2;
-
-	return Sum(tree, begin, std::min(end, half), i * 2, leftLimit, half) 
-		+ Sum(tree, std::max(begin, half + 1), end, i * 2 + 1, half + 1, rightLimit);
-}
-
-void Update(std::vector<int> &tree, int i, int leftLimit, int rightLimit, int pos, std::function<int(int)>& updateValue)
-{
-	if (leftLimit == rightLimit)
-		tree[i] = updateValue(tree[i]);
-	else
+	int Sum(int i, int begin, int end, int leftLimit, int rightLimit)
 	{
+		if (begin > end) 
+			return 0;
+		if (begin == leftLimit && end == rightLimit) 
+			return m_tree[i];
+
 		int half = (leftLimit + rightLimit) / 2;
-		if (pos <= half)
-			Update(tree, i * 2, leftLimit, half, pos, updateValue);
+		int diff = m_treeDiffs[i] * (end - begin + 1);
+		return Sum(i * 2, begin, std::min(end, half), leftLimit, half) +
+			Sum(i * 2 + 1, std::max(begin, half + 1), end, half + 1, rightLimit) + diff;
+	}
+
+	void Update(int i, int begin, int end, int leftLimit, int rightLimit, int updateValue)
+	{
+		if (begin > end)
+			return;
+
+		m_tree[i] = m_tree[i] + updateValue*(end - begin + 1);
+
+		if (leftLimit == begin && rightLimit == end)
+		{
+			m_treeDiffs[i] += updateValue;
+			return;
+		}
+
+		int half = (leftLimit + rightLimit) / 2;
+		Update(i * 2, begin, std::min(end, half), leftLimit, half, updateValue);
+		Update(i * 2 + 1, std::max(begin, half + 1), end, half + 1, rightLimit, updateValue);
+	}
+
+private:
+	std::vector<int> m_tree;
+	std::vector<int> m_treeDiffs;
+
+	void BuildTree(const std::vector<int>& arr, int i, int leftLimit, int rightLimit)
+	{
+		if (leftLimit == rightLimit)
+			m_tree[i] = arr[leftLimit];
 		else
-			Update(tree, i * 2 + 1, half + 1, rightLimit, pos, updateValue);
-
-		tree[i] = tree[i * 2] + tree[i * 2 + 1];
+		{
+			int half = (leftLimit + rightLimit) / 2;
+			BuildTree(arr, i * 2, leftLimit, half);
+			BuildTree(arr, i * 2 + 1, half + 1, rightLimit);
+			m_tree[i] = m_tree[i * 2] + m_tree[i * 2 + 1];
+		}
 	}
-}
+};
+
+
